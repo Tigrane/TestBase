@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Attributes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="36" Nullable="false" />
+    <Property Name="idTypes" Type="nvarchar" MaxLength="36" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Classes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="36" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Objects">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="36" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="idClass" Type="nvarchar" MaxLength="36" Nullable="false" />
+    <Property Name="idParent" Type="nvarchar" MaxLength="36" />
+    <Property Name="due" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RefClasses">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="36" Nullable="false" />
+    <Property Name="idClass" Type="nvarchar" MaxLength="36" Nullable="false" />
+    <Property Name="idAttribute" Type="nvarchar" MaxLength="36" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RefObjects">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="36" Nullable="false" />
+    <Property Name="idObjects" Type="nvarchar" MaxLength="36" Nullable="false" />
+    <Property Name="idAttributes" Type="nvarchar" MaxLength="36" Nullable="false" />
+    <Property Name="value" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Types">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="36" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Attributes_Types">
+    <End Role="Types" Type="Self.Types" Multiplicity="1" />
+    <End Role="Attributes" Type="Self.Attributes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Types">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Attributes">
+        <PropertyRef Name="idTypes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Objects_Classes">
+    <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+    <End Role="Objects" Type="Self.Objects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Objects">
+        <PropertyRef Name="idClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Objects_Objects">
+    <End Role="Objects" Type="Self.Objects" Multiplicity="0..1" />
+    <End Role="Objects1" Type="Self.Objects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Objects">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Objects1">
+        <PropertyRef Name="idParent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RefClasses_Attributes">
+    <End Role="Attributes" Type="Self.Attributes" Multiplicity="1" />
+    <End Role="RefClasses" Type="Self.RefClasses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attributes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RefClasses">
+        <PropertyRef Name="idAttribute" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RefClasses_Classes">
+    <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+    <End Role="RefClasses" Type="Self.RefClasses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RefClasses">
+        <PropertyRef Name="idClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RefObjects_Attributes">
+    <End Role="Attributes" Type="Self.Attributes" Multiplicity="1" />
+    <End Role="RefObjects" Type="Self.RefObjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attributes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RefObjects">
+        <PropertyRef Name="idAttributes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RefObjects_Objects">
+    <End Role="Objects" Type="Self.Objects" Multiplicity="1" />
+    <End Role="RefObjects" Type="Self.RefObjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Objects">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RefObjects">
+        <PropertyRef Name="idObjects" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestBaseModelStoreContainer">
+    <EntitySet Name="Attributes" EntityType="Self.Attributes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Objects" EntityType="Self.Objects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RefClasses" EntityType="Self.RefClasses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RefObjects" EntityType="Self.RefObjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Attributes_Types" Association="Self.FK_Attributes_Types">
+      <End Role="Types" EntitySet="Types" />
+      <End Role="Attributes" EntitySet="Attributes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Objects_Classes" Association="Self.FK_Objects_Classes">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="Objects" EntitySet="Objects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Objects_Objects" Association="Self.FK_Objects_Objects">
+      <End Role="Objects" EntitySet="Objects" />
+      <End Role="Objects1" EntitySet="Objects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RefClasses_Attributes" Association="Self.FK_RefClasses_Attributes">
+      <End Role="Attributes" EntitySet="Attributes" />
+      <End Role="RefClasses" EntitySet="RefClasses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RefClasses_Classes" Association="Self.FK_RefClasses_Classes">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="RefClasses" EntitySet="RefClasses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RefObjects_Attributes" Association="Self.FK_RefObjects_Attributes">
+      <End Role="Attributes" EntitySet="Attributes" />
+      <End Role="RefObjects" EntitySet="RefObjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RefObjects_Objects" Association="Self.FK_RefObjects_Objects">
+      <End Role="Objects" EntitySet="Objects" />
+      <End Role="RefObjects" EntitySet="RefObjects" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestBaseModelStoreContainer" CdmEntityContainer="TestBaseEntities">
+    <EntitySetMapping Name="Attributes">
+      <EntityTypeMapping TypeName="TestBaseModel.Attributes">
+        <MappingFragment StoreEntitySet="Attributes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idTypes" ColumnName="idTypes" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Classes">
+      <EntityTypeMapping TypeName="TestBaseModel.Classes">
+        <MappingFragment StoreEntitySet="Classes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Objects">
+      <EntityTypeMapping TypeName="TestBaseModel.Objects">
+        <MappingFragment StoreEntitySet="Objects">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="idClass" ColumnName="idClass" />
+          <ScalarProperty Name="idParent" ColumnName="idParent" />
+          <ScalarProperty Name="due" ColumnName="due" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RefClasses">
+      <EntityTypeMapping TypeName="TestBaseModel.RefClasses">
+        <MappingFragment StoreEntitySet="RefClasses">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idClass" ColumnName="idClass" />
+          <ScalarProperty Name="idAttribute" ColumnName="idAttribute" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RefObjects">
+      <EntityTypeMapping TypeName="TestBaseModel.RefObjects">
+        <MappingFragment StoreEntitySet="RefObjects">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idObjects" ColumnName="idObjects" />
+          <ScalarProperty Name="idAttributes" ColumnName="idAttributes" />
+          <ScalarProperty Name="value" ColumnName="value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Types">
+      <EntityTypeMapping TypeName="TestBaseModel.Types">
+        <MappingFragment StoreEntitySet="Types">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="534e64094498462ba09446adf0bcfc5b" Name="Diagram1">
+        <EntityTypeShape EntityType="TestBaseModel.Attributes" Width="1.5" PointX="5.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestBaseModel.Classes" Width="1.5" PointX="0.625" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestBaseModel.Objects" Width="1.5" PointX="3.125" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestBaseModel.RefClasses" Width="1.5" PointX="1.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestBaseModel.RefObjects" Width="1.5" PointX="5.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestBaseModel.Types" Width="1.5" PointX="7.375" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="TestBaseModel.FK_Attributes_Types" ManuallyRouted="false" />
+        <AssociationConnector Association="TestBaseModel.FK_RefClasses_Attributes" ManuallyRouted="false" />
+        <AssociationConnector Association="TestBaseModel.FK_RefObjects_Attributes" ManuallyRouted="false" />
+        <AssociationConnector Association="TestBaseModel.FK_Objects_Classes" ManuallyRouted="false" />
+        <AssociationConnector Association="TestBaseModel.FK_RefClasses_Classes" ManuallyRouted="false" />
+        <AssociationConnector Association="TestBaseModel.FK_Objects_Objects" ManuallyRouted="false" />
+        <AssociationConnector Association="TestBaseModel.FK_RefObjects_Objects" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

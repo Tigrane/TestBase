@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Types App</title>
+</head>
+<body>
+                    <div>
+                        <input type="button" value="TestData" onclick="SetTestData();" />
+                    </div>
+
+                    <div>
+                        <h2>All Types</h2>
+                        <ul id="types" />
+                    </div>
+
+                    <div>
+                        <h2>All Classes</h2>
+                        <ul id="classes" />
+                    </div>
+                    <!--<div>
+                        <h2>Search by ID</h2>
+                        <input type="text" id="typeId" size="5" />
+                        <input type="button" value="Search" onclick="find();" />
+                        <p id="typesFind" />
+                    </div>-->
+
+                    <div>
+                        <h2>Insert Type</h2>
+                        <input type="text" id="nameType" size="50" />
+                        <input type="button" value="PutType" onclick="SetDataTypes();" />
+                        <!--<p id="typesFind" />-->
+                    </div>
+
+                    <div>
+                        <h2>Insert Class</h2>
+                        <label>name</label><input type="text" id="nameClass" size="50" title="name"/>
+                        <label>idParent</label><input type="text" id="idParentClass" size="50" title="idParent" />
+                        <label>due</label><input type="text" id="dueClass" size="50" title="due" />
+                        <input type="button" value="PutClass" onclick="SetDataClasses();" />
+                        <!--<p id="typesFind" />-->
+                    </div>
+
+
+                    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+                    <script>
+                        var uriType = 'api/Types';
+
+                        $(document).ready(function () {
+                            
+                            $.getJSON(uriType).done(function (data) {
+                                $.each(data, function (key, item) {
+                                    //$('<li>', { text: formatItem(item) }).appendTo($('#types'));
+                                    $('<td>', { text: item.id }).appendTo($('#types'));
+                                    $('<td>', { text: item.name }).appendTo($('#types'));
+                                    //$('<td>', { text: item.id }).appendTo($('#types'));
+                                    //$('<td>', { text: item.name }).appendTo($('#types'));
+                                    $('<tr>').appendTo($('#types'));
+                                })
+                                
+                                
+                            })
+                            .error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+                                /* alert(jqXHR.responseText) */
+                                alert("error occurred!");
+                            })
+                                ;
+                        });
+
+
+                        var uriClasses = 'api/Classes';
+
+                        $.getJSON(uriClasses).done(function (data) {
+                            $.each(data, function (key, item) {
+                                //$('<li>', { text: formatItem(item) }).appendTo($('#types'));
+                                $('<td>', { text: item.id }).appendTo($('#classes'));
+                                $('<td>', { text: item.name }).appendTo($('#classes'));
+                                $('<td>', { text: item.idParent }).appendTo($('#classes'));
+                                $('<td>', { text: item.due }).appendTo($('#classes'));
+                                $('<tr>').appendTo($('#classes'));
+                            });
+                        })
+                           .error(function (jqXHR, textStatus, errorThrown) { /* assign handler */
+                               /* alert(jqXHR.responseText) */
+                               alert("error occurred!");
+                           })
+                        ;
+
+
+
+
+
+                        function formatItem(item) {
+                            return item.name + ': $' + item.id;
+                        }
+
+                        function find() {
+                            var id = $('#typeId').val();
+                            $.getJSON(uri + '/' + id)
+                                .done(function (data) {
+                                    $('#typesFind').text(formatItem(data));
+                                })
+                                .fail(function (jqXHR, textStatus, err) {
+                                    $('#typesFind').text('Error: ' + err);
+                                });
+                        }
+
+                        function SetTestData() {
+                            var typeTest = {
+                                "levelCount": $("5").val(),
+                                "typeCount": $("3").val(),
+                                "elementCount": $("100").val()
+                            };
+
+                            $.ajax({
+                                type: "POST",
+                                url: 'api/Objects/FullObjects',
+                                data: JSON.stringify(typeTest),
+                                contentType: "application/json;charset=utf-8",
+                                processData: true,
+                                success: function (data, status, xhr) {
+                                    alert("The result is : " + status);
+                                },
+                                error: function (xhr) {
+                                    alert(xhr.responseText);
+                                }
+                            });
+
+                        }
+
+                        function SetDataTypes() {
+
+                            var typeTest = {
+                                "name": $("#nameType").val(),
+                            };
+        
+                            $.ajax({
+                                type: "POST",
+                                url: 'api/Types/PutTypes',
+                                data: JSON.stringify(typeTest),
+                                contentType: "application/json;charset=utf-8",
+                                processData: true,
+                                success: function (data, status, xhr) {
+                                    alert("The result is : " + status);
+                                },
+                                error: function (xhr) {
+                                    alert(xhr.responseText);
+                                }
+                            });
+                        };
+
+                        function SetDataClasses() {
+
+                            var classesTest = {
+                                "name": $("#nameClass").val(),
+                                "idParent": $("#idParentClass").val(),
+                                "due": $("#dueClass").val(),
+                            };
+
+                            $.ajax({
+                                type: "POST",
+                                url: 'api/Classes/PutClasses',
+                                data: JSON.stringify(classesTest),
+                                contentType: "application/json;charset=utf-8",
+                                processData: true,
+                                success: function (data, status, xhr) {
+                                    alert("The result is : " + status);
+                                },
+                                error: function (xhr) {
+                                    alert(xhr.responseText);
+                                }
+                            });
+                        };
+     
+                    </script>
+</body>
+</html>
